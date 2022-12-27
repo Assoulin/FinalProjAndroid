@@ -9,10 +9,18 @@ import com.example.lec17.database.dao.PeopleDao
 import com.example.lec17.models.*
 
 const val DB_NAME = "AppDatabase"
-const val DB_VERSION = 1
+const val DB_VERSION = 2
 
 @Database(
-    entities = [Person::class, Dog::class, Film::class, Review::class, FGenre::class, FilmGenreCrossRef::class],
+    entities = [
+        Person::class,
+        Dog::class,
+        Film::class,
+        Review::class,
+        FGenre::class,
+        FilmGenreCrossRef::class,
+
+    ],
     version = DB_VERSION
 )
 abstract class AppDatabase : RoomDatabase() {

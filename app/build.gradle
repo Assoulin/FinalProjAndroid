@@ -6,6 +6,14 @@ plugins {
 }
 
 android {
+    //path to file
+    def apiKeyPropertiesFile = rootProject.file("apikey.properties")
+//
+    //properties in gradle ~ Map in Java
+    def apiKeyProperties = new Properties()
+//
+    apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
+
     namespace 'com.example.lec17'
     compileSdk 33
 
@@ -17,6 +25,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField('String', 'TMDB_API_KEY', apiKeyProperties['TMDB_API_KEY'])
+        buildConfigField('String', 'TMDB_BASE_URL', apiKeyProperties['TMDB_BASE_URL'])
     }
 
     buildTypes {
@@ -52,6 +62,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+
     implementation 'com.google.devtools.ksp:symbol-processing-api:1.7.22-1.0.8'
     def room_version = "2.4.3"
 
@@ -68,4 +79,10 @@ dependencies {
     implementation "androidx.room:room-paging:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
 
+    //retrofit:
+    def retrofit_version = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    //OkHttp
+    implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
 }
